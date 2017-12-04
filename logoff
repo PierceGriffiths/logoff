@@ -1,0 +1,15 @@
+#!/bin/bash
+#simple script for logging out via the command line; requires sudo privileges
+read -p "Are you sure you want to log out, $USER? [y/n]: " response
+while true; do
+    if [ "${response,,}" = "y" ]; then
+	invokingUser=$USER
+	sudo -K
+	sudo -p "Enter password for %u: " bash -c "pkill -u $invokingUser && service lightdm restart"
+	break
+    elif [ "${response,,}" = "n" ]; then
+	break
+    else
+	read -p "Invalid response. Please enter either a 'y' or an 'n': " response
+    fi
+done
