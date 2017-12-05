@@ -4,8 +4,7 @@ read -p "Are you sure you want to log out, $USER? [y/n]: " response
 while true; do
     if [ "${response,,}" = "y" ]; then
 	invokingUser=$USER
-	sudo -K
-	sudo -p "Enter password for %u: " bash -c "pkill -u $invokingUser && service lightdm restart"
+	sudo -k -p "Enter password for %u: " pkill -u $invokingUser
 	break
     elif [ "${response,,}" = "n" ]; then
 	break
