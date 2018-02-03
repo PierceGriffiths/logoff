@@ -1,10 +1,9 @@
 #!/bin/bash
-#simple script for logging out via the command line; requires sudo privileges
+#simple script for logging out via a terminal emulator
 read -p "Are you sure you want to log out, $USER? [y/n]: " response
 while true; do
     if [ "${response,,}" = "y" ]; then
-	invokingUser=$USER
-	sudo -k -p "Enter password for %u: " pkill -u $invokingUser
+	pkill -u $USER
 	break
     elif [ "${response,,}" = "n" ]; then
 	break
